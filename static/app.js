@@ -73,8 +73,8 @@ var main = function() {
                 nextSection = nextSection.next();
             }
             currentSection.fadeOut(600).removeClass('activesection');
-            currentSection.fadeIn(600).addClass('inactivesection');
-            nextSection.fadeOut(600).removeClass('inactivesection');
+            currentSection.addClass('inactivesection');
+            nextSection.removeClass('inactivesection');
             nextSection.fadeIn(600).addClass('activesection');
         }
     })
