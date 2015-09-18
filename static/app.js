@@ -73,7 +73,7 @@ var main = function() {
             currentSection.fadeOut(300).removeClass('activesection');
             currentSection.addClass('inactivesection');
             nextSection.removeClass('inactivesection');
-            currentSection.fadeIn(300).addClass('activesection');
+            nextSection.fadeIn(300).addClass('activesection');
         }
     })
 
