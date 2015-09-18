@@ -60,13 +60,15 @@ var main = function() {
         })
     $('.showhide').click(function(e) {
         e.preventDefault();
-        var currentSlide = $('.active-slide')
         var clickedName = $(this).text();
         var currentSection = $('.activesection');
         // alert(clickedName);
         // alert($('.activesection').attr('id') != clickedName);
         if($('.activesection').attr('id') != clickedName){
             var nextSection = currentSection.next();
+            if (nextSection.length == 0){
+                nextSection = $('.inactivesection').first()
+            }
             while (nextSection.attr('id') != clickedName){
                 nextSection = nextSection.next();
             }
