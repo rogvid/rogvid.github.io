@@ -63,8 +63,8 @@ var main = function() {
         var currentSlide = $('.active-slide')
         var clickedName = $(this).text();
         var currentSection = $('.activesection');
-        alert(clickedName);
-        alert($('.activesection').attr('id') != clicedName);
+        // alert(clickedName);
+        // alert($('.activesection').attr('id') != clickedName);
         if($('.activesection').attr('id') != clickedName){
             var nextSection = currentSection.next();
             while (nextSection.attr('id') != clickedName){
