@@ -72,10 +72,10 @@ var main = function() {
             while (nextSection.attr('id') != clickedName){
                 nextSection = nextSection.next();
             }
-            currentSection.fadeOut(300).removeClass('activesection');
-            currentSection.addClass('inactivesection');
-            nextSection.removeClass('inactivesection');
-            nextSection.fadeIn(300).addClass('activesection');
+            currentSection.fadeOut(600).removeClass('activesection');
+            currentSection.fadeIn(600).addClass('inactivesection');
+            nextSection.fadeOut(600).removeClass('inactivesection');
+            nextSection.fadeIn(600).addClass('activesection');
         }
     })
 
