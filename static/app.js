@@ -59,8 +59,8 @@ var main = function() {
             marginTop: "25px", height: "48px"}, 50);
         })
     $('#showhide').click(function() {
-        var currentSection = $('.activesection')
         var clickedName = $(this).text()
+        var currentSection = $('.activesection')
         alert(clickedName)
         if($('.activesection').attr('id').text() != clickedName){
             var nextSection = currentSection.next()
