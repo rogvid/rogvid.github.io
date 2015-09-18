@@ -1,4 +1,13 @@
 var main = function() {
+    String.prototype.format = function() {
+        var s = this,
+            i = arguments.length;
+
+        while (i--) {
+            s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+        }
+        return s;
+    };
     $('.arrow-next').click(function(e){
         e.preventDefault();
         var currentSlide = $('.active-slide');
@@ -49,6 +58,21 @@ var main = function() {
         $(this).stop(true, false).animate({
             marginTop: "25px", height: "48px"}, 50);
         })
+    $('#showhide').click(function() {
+        var currentSection = $('.activesection')
+        var clickedName = $(this).text()
+        alert(clickedName)
+        if($('.activesection').attr('id').text() != clickedName){
+            var nextSection = currentSection.next()
+            while (nextSection.attr('id').text() != clickedName){
+                nextSection = nextSection.next();
+            }
+            currentSection.fadeOut(300).removeClass('activesection')
+            currentSection.addClass('inactivesection')
+            nextSection.removeClass('inactivesection')
+            currentSection.fadeIn(200).addClass('activesection')
+        }
+    })
 
 
     $(window).scroll(function() {

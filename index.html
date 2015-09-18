@@ -29,11 +29,11 @@
         <div class='navbar'>
             <ul class='navbar-ul'>
                 <li class='navbar-ul-li'>
-                    <a href="/">About</a>
+                    <a id="showhide" class="About" href="/">About</a>
                 </li>
-                <!--<li class='navbar-ul-li'>
-                    <a href="/portfolio/">Portfolio</a>
-                </li> Uncomment this when portfolio is fixed-->
+                <li class='navbar-ul-li'>
+                    <a id="showhide" class="Portfolio" href="/portfolio/">Portfolio</a>
+                </li>
             </ul>
         </div>
         <div class='navbar-menu'>
@@ -45,19 +45,19 @@
         <ul class='dropdown-menu'>
             <!--<li>
                 <a href='/'>Blog</a>
-            </li>
-            <li>
-                <a href='/portfolio'>Portfolio</a>
             </li>-->
             <li>
-                <a href='/about'>About</a>
+                <a id="showhide" class="Portfolio" href='/'>Portfolio</a>
+            </li>
+            <li>
+                <a id="showhide" class="About" href='/'>About</a>
             </li>
         </ul>
     </div>
     <div class='container'>
         <div class='wrapper'>
             <div class='content-box'>
-                <section class="about">
+                <section class="activesection" id="About">
                     <div class="center">
                         <div class="resumeheader">
                             <div class='personal_info'>
@@ -164,6 +164,11 @@
 
                         </ul>
                         </div>
+                    </div>
+                </section>
+                <section class="inactivesection" id="Portfolio">
+                    <div class="center">
+                        Project portfolio!
                     </div>
                 </section>
             </div>

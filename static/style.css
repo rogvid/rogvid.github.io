@@ -125,6 +125,12 @@ body {
   background-image: url('/static/images/menu-bar-black.png');
 }
 
+.activesection {
+}
+
+.inactivesection {
+  display: none;
+}
 
 .dropdown-menu {
   background-color: #fff;
