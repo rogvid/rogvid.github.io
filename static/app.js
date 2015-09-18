@@ -58,7 +58,9 @@ var main = function() {
         $(this).stop(true, false).animate({
             marginTop: "25px", height: "48px"}, 50);
         })
-    $('#showhide').click(function() {
+    $('.showhide').click(function(e) {
+        e.preventDefault();
+        var currentSlide = $('.active-slide')
         var clickedName = $(this).text();
         var currentSection = $('.activesection');
         alert(clickedName);
