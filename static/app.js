@@ -62,6 +62,7 @@ var main = function() {
         var clickedName = $(this).text()
         var currentSection = $('.activesection')
         alert(clickedName)
+        alert($('.activesection').attr('id').text())
         if($('.activesection').attr('id').text() != clickedName){
             var nextSection = currentSection.next()
             while (nextSection.attr('id').text() != clickedName){
