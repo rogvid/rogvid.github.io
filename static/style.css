@@ -2,7 +2,7 @@
 body {
   /*font-family: ,'PT Serif', serif;*/
   font-family: 'Questrial', sans-serif;
-  font-size:20px;
+  font-size:18px;
   /*background: url(images/bg4.jpg) no-repeat center center fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -264,7 +264,7 @@ body {
 
 .center {
     /* width: 70% set to this when info-box has been fixed; */
-    width: 90%;
+    width: 80%;
     height: 90%;
     overflow: auto;
     margin: auto;
