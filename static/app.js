@@ -59,19 +59,19 @@ var main = function() {
             marginTop: "25px", height: "48px"}, 50);
         })
     $('#showhide').click(function() {
-        var clickedName = $(this).text()
-        var currentSection = $('.activesection')
-        alert(clickedName)
-        alert($('.activesection').attr('id'))
+        var clickedName = $(this).text();
+        var currentSection = $('.activesection');
+        alert(clickedName);
+        alert($('.activesection').attr('id') != clicedName);
         if($('.activesection').attr('id') != clickedName){
-            var nextSection = currentSection.next()
+            var nextSection = currentSection.next();
             while (nextSection.attr('id') != clickedName){
                 nextSection = nextSection.next();
             }
-            currentSection.fadeOut(300).removeClass('activesection')
-            currentSection.addClass('inactivesection')
-            nextSection.removeClass('inactivesection')
-            currentSection.fadeIn(300).addClass('activesection')
+            currentSection.fadeOut(300).removeClass('activesection');
+            currentSection.addClass('inactivesection');
+            nextSection.removeClass('inactivesection');
+            currentSection.fadeIn(300).addClass('activesection');
         }
     })
 
