@@ -62,16 +62,16 @@ var main = function() {
         var clickedName = $(this).text()
         var currentSection = $('.activesection')
         alert(clickedName)
-        alert($('.activesection').attr('id').text())
-        if($('.activesection').attr('id').text() != clickedName){
+        alert($('.activesection').attr('id'))
+        if($('.activesection').attr('id') != clickedName){
             var nextSection = currentSection.next()
-            while (nextSection.attr('id').text() != clickedName){
+            while (nextSection.attr('id') != clickedName){
                 nextSection = nextSection.next();
             }
             currentSection.fadeOut(300).removeClass('activesection')
             currentSection.addClass('inactivesection')
             nextSection.removeClass('inactivesection')
-            currentSection.fadeIn(200).addClass('activesection')
+            currentSection.fadeIn(300).addClass('activesection')
         }
     })
 
