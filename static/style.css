@@ -35,10 +35,11 @@ body {
     bottom:20px;
     left:20px;
     z-index: 10;
+    opacity: 0.5;
 }
 
 #gotop:hover{
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .header {
