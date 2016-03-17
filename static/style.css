@@ -340,13 +340,14 @@ body {
   padding-top: 0;
   margin-top: 0;
 }
-
+/*
 .projects li div {
   float: left;
   /*word-break: break-all;
-  word-wrap: break-word;*/
+  //word-wrap: break-word;
   width: 48%;
 }
+*/
 
 .project-link {
   text-decoration: none;
