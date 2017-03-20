@@ -58,26 +58,6 @@ var main = function() {
         $(this).stop(true, false).animate({
             marginTop: "25px", height: "48px"}, 50);
         })
-    $('.showhide').click(function(e) {
-        e.preventDefault();
-        var clickedName = $(this).text();
-        var currentSection = $('.activesection');
-        // alert(clickedName);
-        // alert($('.activesection').attr('id') != clickedName);
-        if($('.activesection').attr('id') != clickedName){
-            var nextSection = currentSection.next();
-            if (nextSection.length == 0){
-                nextSection = $('.inactivesection').first()
-            }
-            while (nextSection.attr('id') != clickedName){
-                nextSection = nextSection.next();
-            }
-            currentSection.fadeOut(600).removeClass('activesection');
-            currentSection.addClass('inactivesection');
-            nextSection.removeClass('inactivesection');
-            nextSection.fadeIn(600).addClass('activesection');
-        }
-    })
 
 
     $(window).scroll(function() {
@@ -89,6 +69,13 @@ var main = function() {
         else {
             $('#gotop').fadeOut(300);
         }
+
+        $(".hidden-portfolio-element").each(function(i, obj){
+            if($(window).scrollTop() + 300 > $(obj).offset().top){
+                $(obj).fadeOut(200).removeClass("hidden-portfolio-element");
+                $(obj).fadeIn(400).addClass("visible-portfolio-element");
+            }
+        });
 
         /*if($(window).scrollTop() == $(document).height() - $(window).height()){
             $('.hidden').first().fadeIn(800);
