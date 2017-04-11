@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="/static/d3/d3.v4.js"></script>
+  <script src="/static/jquery/jquery-3.1.1.js"></script>
+  <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+  <!--<script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>-->
+  <style>
+      rect.dimple-series-0{
+          fill: #363636;
+          stroke: none;
+          opacity: 1;
+      }
+
+      .bar {
+        fill: steelblue;
+      }
+
+      .bar:hover {
+        fill: #686868;
+      }
+
+      .bar-text {
+        opacity: 0.0;
+        fill: black;
+        stroke: black;
+        font-size: 22px;
+      }
+
+      .bar-text:hover {
+        opacity: 0;
+      }
+
+      .axis--x path {
+        display: none;
+      }
+
+      .ready-to-work-top {
+        top: 1550px;
+        left: 650px;
+        position: absolute;
+      }
+
+      .ready-to-work-fixed {
+        top: 150px;
+        left: 650px;
+        position: fixed;
+      }
+
+      .ready-to-work-bottom {
+        top: 6600px;
+        left: 650px;
+        position: absolute;
+      }
+
+      .visualization-list {
+        list-style-type: none;
+      }
+
+      .visualization-list li {
+        font-size: 18px;
+        padding: 5px;
+        margin: 5px;
+        background-color: #e5e5e5;
+        border-radius: 10px;
+        width: 150px;
+        z-index: 1000000;
+      }
+
+      .description {
+        visibility: hidden;
+        display: none;
+      }
+
+      .visualization-list li:hover .description{
+        visibility: visible;
+        display: inline;
+      }
+  </style>
+  </head>
+<body>
+  <h1 id="title"></h1>
+  <div style="margin-top: 150px; margin-left: auto; margin-right: auto; width: 800px; font-size: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; line-height: 150%">
+      <h1> Visualization Criticism and Recreation </h1>
+      In the process of creating beautiful and catchy visualizations of data many tend to forget that the true purpose of a visualization is to communicate some information to the viewer. If a visualization fails to communicate this, or in some way obscures the information it doesn't matter if the visualization is beautiful, or that it looks creative, it is by definition a bad visualization. There are many ways visualizations can fail to communicate the data, but an example could be the use of too much non-data-ink, i.e. ink to color things not related to the data. Another example is too much extra information added to the graph, i.e. too many gridlines, too much text, etc. Last but not least, and this one is by far the most important and dangerous misuse of data visualization, displaying data incorrectly, i.e. not starting the y-axis at zero resulting in a visualization that displays a relative effect, instead of an absolute effect. If the visualization then also doens't report any values for the bottom level of the y-axis, the creator should be forced to take a course in data visualization. This last one is especially dangerous, as people don't always tend to look at all the information present on visualizations, and often tend to draw wrong conclusions from them. One personal example of mine, which is related to the media hype effect related to relative differences, happend in early 2016 when it was reported that eating bacon lead to a 17% increase in the risk of developing colon cancer. There is nothing wrong with the numbers, their research really showed that eating processed meats lead to an increased risk of developing colon cancer of around 17%. Bear in mind that according to <a href="http://www.cancer.net/cancer-types/colorectal-cancer/risk-factors-and-prevention">www.cancer.net</a> the average person has a 5% probability of developing cancer. To put this into perspective, <a href="http://scienceblog.cancerresearchuk.org/2015/10/26/processed-meat-and-cancer-what-you-need-to-know/">Cancer Research UK</a> has a blog post collecting the information from various sources. In this post, which references various UK studies, they point to the fact that people eating little processed meat, have a colon cancer rate of around 5.6%, while people eating a lot of processed meat have a rate of around 6.6%, which gives an increased risk of 17%, or 1% point, when comparing the little processed meat eaters with the a lot of processed meat eaters.
+      <br/>
+      Getting back to the importance of visualizations, we should always strive to communicate data in the clearest and most informative manner. This also means taking into account what what the general population might understand from the visualization. If there is a source of confusion, try your best to amend it.
+      <br/>
+      What follows here is a simplified version of the London Worker Index visualization by AVANTA.
+
+  </div>
+  <!--<div style="position: absolute; top: 1600px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>High lie factor of around 9</li>
+      <li>Bar heights don't actually represent the values in the bars</li>
+      <li>Low data-to-ink ratio</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 580px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Shapes make it hard to distinguish size of effect</li>
+      <li>Uncertain of the lie factor but my guess is that it is not in the 0.95 - 1.05 range</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 680px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Bike shape obscures the numbers, hiding the true information this visualization is trying to communicate</li>
+      <li>If the size of the numbers represent the effect, this visualization has a high lie factor</li>
+      <li>Low data-to-ink ratio</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 850px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Shapes make it hard to distinguish size of effect</li>
+      <li>High lie factor</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 1650px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Shapes make it hard to distinguish size of effect</li>
+      <li>High lie factor</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 1850px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Shapes make it hard to distinguish size of effect</li>
+      <li>High lie factor</li>
+    </ul>
+  </div>
+  <div style="position: relative; top: 2050px; left: 0px; width: 200px;">
+    <ul class="visualization-list">
+      <li>Shapes make it hard to distinguish size of effect</li>
+      <li>High lie factor</li>
+    </ul>
+  </div>-->
+
+  <img id="avanta-img" style="margin-left: 150px; margin-top: 150px; padding-bottom: 50px" src="/static/original_image.jpg"></img>
+
+  <div style="margin-top: 150px; margin-left: auto; margin-right: auto; width: 800px; font-size: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; line-height: 150%">
+      <h2> Conclusion </h2>
+      The London Worker Index visualization is a creative way to display information. However, it fails to communicate its message clear enough and the choice of bikes, bowls, phones, etc. to display an effect, not only fails to represent a good LIE factor, but also reduces the number of companies that can be compared. I'm not sure what they were trying to achieve when visualizing data like this, but they were not informative, and they often had a too high LIE factor and a too low data-to-ink ratio. Hopefully my <b>very</b> simple representations of the same data gives a clearer understanding of the data. If I find the time for it I might look into the actual data these visualizations are based on so I can include all the companies in all of the visualizations.
+  </div>
+</body>
+  <script type="text/javascript">
+  /*
+    Use D3 (not dimple.js) to load the TSV file
+    and pass the contents of it to the draw function
+    */
+    var margin = {left: 75, top: 75, right: 75, bottom: 75},
+        width = 700 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+          //debugger;
+
+    var svg = d3.select("body")
+      .append("svg")
+        .attr("class", "ready-to-work-top")
+        .attr("id", "visualization")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.bottom + margin.bottom);
+    
+    var g = svg.append("g")
+              .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        y = d3.scaleLinear().rangeRound([height, 0]);
+    
+    function updateData(filepath, y_axis_units, title) {
+        // Get the data again
+      d3.csv(filepath, function(d) {
+          d.Value = +d.Value;
+          return d;
+        }, function(error, data) {
+        if (error) throw error;
+
+        x.domain(data.map(function(d){ return d.Company; }));
+        y.domain([0, d3.max(data, function(d) { return d.Value; })]);
+
+        // Make the changes
+        svg.selectAll(".bar").remove()
+        svg.select(".figure-title").remove()
+        g.selectAll("text").remove()
+        g.selectAll(".axis").remove()
+
+        svg.append("text")
+            .attr("class", "figure-title")
+            .attr("x", (width + margin.left + margin.right) / 2)             
+            .attr("y", 0 + margin.top / 2)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "22px") 
+            //.style("text-decoration", "underline")  
+            .text(title);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0, " + height + ")")
+            .call(d3.axisBottom(x))
+            .attr("font-size", "12px")
+          
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(10))
+            .attr("font-size", "12px")
+        .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "bottom")
+            .attr("fill", "black")
+            .attr("font-size", "15px")
+            .text(y_axis_units);
+
+        var bars = g.selectAll(".bar")
+          .data(data)
+          .enter();
+        
+        var rects = bars
+          .append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) { return x(d.Company); })
+            .attr("y", function(d) { return y(d.Value); })
+            .attr("width", x.bandwidth())
+            .attr("height", function(d) { return height - y(d.Value); });
+        });
+    }
+  </script>
+  <script>
+  $(document).ready(function(){
+    var figure_position_absolute = true;
+    if (($(window).scrollTop() > 6450)){
+      $("#visualization").removeClass("ready-to-work-fixed");
+      $("#visualization").removeClass("ready-to-work-top");
+      $("#visualization").addClass("ready-to-work-bottom");
+      figure_position_absolute = true;
+    }
+    var fignum = 1000
+    var figure_positions = [
+        ($(window).scrollTop() < 1600),
+        ($(window).scrollTop() > 1600 && ($(window).scrollTop() < 1800)),
+        ($(window).scrollTop() > 1800 && ($(window).scrollTop() < 2200)),
+        ($(window).scrollTop() > 2200 && ($(window).scrollTop() < 2600)),
+        ($(window).scrollTop() > 2600 && ($(window).scrollTop() < 3000)),
+        ($(window).scrollTop() > 3000 && ($(window).scrollTop() < 3400)),
+        ($(window).scrollTop() > 3400 && ($(window).scrollTop() < 3700)),
+        ($(window).scrollTop() > 3700 && ($(window).scrollTop() < 4100)),
+        ($(window).scrollTop() > 4100 && ($(window).scrollTop() < 4500)),
+        ($(window).scrollTop() > 4500 && ($(window).scrollTop() < 4900)),
+        ($(window).scrollTop() > 4900 && ($(window).scrollTop() < 5200)),
+        ($(window).scrollTop() > 5200 && ($(window).scrollTop() < 5400)),
+        ($(window).scrollTop() > 5400 && ($(window).scrollTop() < 6000)),
+        ($(window).scrollTop() > 6000 && ($(window).scrollTop() < 6400)),
+        ($(window).scrollTop() > 6400)
+    ]
+    if (figure_positions[1]){
+      updateData("/static/data/skipping_breakfast.csv", "%", "Skipping Breakfast");
+      fignum = 1;
+    }
+    else if (figure_positions[0]){
+      updateData("/static/data/getting_ready_for_work.csv", "Minutes", "Getting Ready for Work");
+      fignum = 0;
+    }
+    else if (figure_positions[2]){
+      updateData("/static/data/cycle_to_work.csv", "%", "Cycle to Work");
+      fignum = 2;
+    }
+    else if (figure_positions[3]){
+      updateData("/static/data/checking_social_media.csv", "Times", "Checking Social Media");
+      fignum = 3;
+    }
+    else if (figure_positions[4]){
+      updateData("/static/data/daily_commute.csv", "Minutes", "Daily Commute");
+      fignum = 4;
+    }
+    else if (figure_positions[5]){
+      updateData("/static/data/nights_out_drinking_per_working_week.csv", "#Nights", "Nights Out Drinking per Working Week");
+      fignum = 5;
+    }
+    else if (figure_positions[6]){
+      updateData("/static/data/lunchtime_spend.csv", "pounds", "Lunchtime Spend");
+      fignum = 6;
+    }
+    else if (figure_positions[7]){
+      updateData("/static/data/annual_holiday.csv", "#Days", "Annual Holiday");
+      fignum = 7;
+    }
+    else if (figure_positions[8]){
+      updateData("/static/data/had_a_hangover_at_work.csv", "%", "Had a Hangover at Work");
+      fignum = 8;
+    }
+    else if (figure_positions[9]){
+      updateData("/static/data/shopping_trips_during_lunch.csv", "Times", "Shopping Trips During Lunch");
+      fignum = 9;
+    }
+    else if (figure_positions[10]){
+      updateData("/static/data/hours_spent_working_per_week.csv", "Hours", "Hours Spent Working per Week");
+      fignum = 10;
+    }
+    else if (figure_positions[11]){
+      updateData("/static/data/average_hours_of_sleep_per_week_night.csv", "Hours", "Average Hours of Sleep per Week Night");
+      fignum = 11;
+    }
+    else if (figure_positions[12]){
+      updateData("/static/data/early_birds.csv", "%", "Early Birds");
+      fignum = 12;
+    }
+    else if (figure_positions[13]){
+      updateData("/static/data/office_romance.csv", "%", "Office Romance");
+      fignum = 13;
+    }
+    else if (figure_positions[14]){
+      updateData("/static/data/loal.csv", "Minutes", "Length of a Lunchbreak");
+      fignum = 14;
+    }
+    $(window).scroll(function(){
+      figure_positions = [
+        ($(window).scrollTop() < 1600),
+        ($(window).scrollTop() > 1600 && ($(window).scrollTop() < 1800)),
+        ($(window).scrollTop() > 1800 && ($(window).scrollTop() < 2200)),
+        ($(window).scrollTop() > 2200 && ($(window).scrollTop() < 2600)),
+        ($(window).scrollTop() > 2600 && ($(window).scrollTop() < 3000)),
+        ($(window).scrollTop() > 3000 && ($(window).scrollTop() < 3400)),
+        ($(window).scrollTop() > 3400 && ($(window).scrollTop() < 3700)),
+        ($(window).scrollTop() > 3700 && ($(window).scrollTop() < 4100)),
+        ($(window).scrollTop() > 4100 && ($(window).scrollTop() < 4500)),
+        ($(window).scrollTop() > 4500 && ($(window).scrollTop() < 4900)),
+        ($(window).scrollTop() > 4900 && ($(window).scrollTop() < 5200)),
+        ($(window).scrollTop() > 5200 && ($(window).scrollTop() < 5400)),
+        ($(window).scrollTop() > 5400 && ($(window).scrollTop() < 6000)),
+        ($(window).scrollTop() > 6000 && ($(window).scrollTop() < 6300)),
+        ($(window).scrollTop() > 6300)
+      ]
+
+		  if (($(window).scrollTop() > $("#avanta-img").offset().top && $(window).scrollTop() < 6450) && figure_position_absolute){
+        $("#visualization").removeClass("ready-to-work-top");
+        $("#visualization").removeClass("ready-to-work-bottom");
+        $("#visualization").addClass("ready-to-work-fixed");
+        figure_position_absolute = false;
+      }
+		  else if (($(window).scrollTop() < $("#avanta-img").offset().top) && !figure_position_absolute){
+        $("#visualization").removeClass("ready-to-work-fixed");
+        $("#visualization").addClass("ready-to-work-top");
+        figure_position_absolute = true;
+      }
+		  else if (($(window).scrollTop() > 6450) && !figure_position_absolute){
+        $("#visualization").removeClass("ready-to-work-fixed");
+        $("#visualization").addClass("ready-to-work-bottom");
+        figure_position_absolute = true;
+      }
+
+      if (figure_positions[1]){
+        updateData("/static/data/skipping_breakfast.csv", "%", "Skipping Breakfast");
+      }
+      else if (figure_positions[0]){
+        updateData("/static/data/getting_ready_for_work.csv", "Minutes", "Getting Ready for Work");
+      }
+      else if (figure_positions[2]){
+        updateData("/static/data/cycle_to_work.csv", "%", "Cycle to Work");
+      }
+      else if (figure_positions[3]){
+        updateData("/static/data/checking_social_media.csv", "Times", "Checking Social Media");
+      }
+      else if (figure_positions[4]){
+        updateData("/static/data/daily_commute.csv", "Minutes", "Daily Commute");
+      }
+      else if (figure_positions[5]){
+        updateData("/static/data/nights_out_drinking_per_working_week.csv", "#Nights", "Nights Out Drinking per Working Week");
+      }
+      else if (figure_positions[6]){
+        updateData("/static/data/lunchtime_spend.csv", "pounds", "Lunchtime Spend");
+      }
+      else if (figure_positions[7]){
+        updateData("/static/data/annual_holiday.csv", "#Days", "Annual Holiday");
+      }
+      else if (figure_positions[8]){
+        updateData("/static/data/had_a_hangover_at_work.csv", "%", "Had a Hangover at Work");
+      }
+      else if (figure_positions[9]){
+        updateData("/static/data/shopping_trips_during_lunch.csv", "Times", "Shopping Trips During Lunch");
+      }
+      else if (figure_positions[10]){
+        updateData("/static/data/hours_spent_working_per_week.csv", "Hours", "Hours Spent Working per Week");
+      }
+      else if (figure_positions[11]){
+        updateData("/static/data/average_hours_of_sleep_per_week_night.csv", "Hours", "Average Hours of Sleep per Week Night");
+      }
+      else if (figure_positions[12]){
+        updateData("/static/data/early_birds.csv", "%", "Early Birds");
+      }
+      else if (figure_positions[13]){
+        updateData("/static/data/office_romance.csv", "%", "Office Romance");
+      }
+      else if (figure_positions[14]){
+        updateData("/static/data/loal.csv", "Minutes", "Length of a Lunchbreak");
+      }
+    });
+  });
+  </script
+</html>
