@@ -79,12 +79,12 @@ body {
 .navbar {
     width: 48%;
     height: 100%;
-    float: right;
+    float: none;
 }
 
 .navbar-menu {
   height: 100%;
-  float: right;
+  float: none;
   background-color: #ffffff;
   height: 55px;
   width: 20%;
